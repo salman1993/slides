@@ -43,11 +43,11 @@ Welcome everyone. Today I'll present our work on establishing strong baselines f
 
 <v-clicks>
 
-- Answer questions using a single fact
-- SimpleQuestions is the standard benchmark
-- Complex architectures, diminishing gains
-- No rigorous ablation studies exist
-- Goal: find the simplest model that works
+- Simple QA: answer questions by looking up a single fact
+- SimpleQuestions dataset is the standard benchmark
+- Increasingly complex neural architectures for diminishing gains
+- No rigorous ablation studies to isolate what helps
+- Our goal: find the simplest model that works well
 
 </v-clicks>
 
@@ -102,9 +102,9 @@ The key insight is that each of these stages can be tackled with simple models â
 
 <v-clicks>
 
-- BiLSTM-CRF for entity detection
-- BiGRU / CNN for relation prediction
-- GloVe 300d word embeddings
+- BiLSTM-CRF sequence tagger for entity detection
+- BiGRU or CNN classifier for relation prediction
+- GloVe 300d embeddings, hidden size 300
 
 </v-clicks>
 
@@ -115,8 +115,8 @@ The key insight is that each of these stages can be tackled with simple models â
 
 <v-clicks>
 
-- CRF for entity detection
-- Logistic Regression for relations
+- CRF sequence tagger for entity detection
+- Logistic Regression with tf-idf or GloVe features
 - No deep learning required
 
 </v-clicks>
@@ -198,10 +198,10 @@ This shows that sophisticated architectures provide only modest gains over stron
 
 <v-clicks>
 
-- Simple models nearly match state of the art
-- Non-neural methods beat Memory Networks
-- Many complex models add unnecessary overhead
-- Simpler means easier to deploy and maintain
+- Simple neural models nearly match state of the art
+- Non-neural baselines beat the original Memory Networks
+- Several complex published models underperform our baselines
+- Simpler models are easier to train, deploy, and maintain
 
 </v-clicks>
 

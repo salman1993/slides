@@ -228,6 +228,10 @@ graph LR
 ```
 
 ---
+src: ./pages/multi-file.md
+---
+
+---
 layout: center
 class: text-center
 ---
