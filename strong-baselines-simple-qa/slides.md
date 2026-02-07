@@ -43,22 +43,18 @@ Welcome everyone. Today I'll present our work on establishing strong baselines f
 
 <v-clicks>
 
-- **Simple QA** over knowledge graphs: answer questions by looking up a single fact
-  - *"Where was Sasha Vujacic born?"* → entity: Sasha Vujacic, relation: place_of_birth
-
-- The **SimpleQuestions** dataset (Bordes et al., 2015) is the de facto benchmark
-
-- Research trend: increasingly complex NN architectures for diminishing gains
-  - Attention mechanisms, hierarchical encoders, residual BiLSTMs...
-
-- **Problem:** lack of rigorous ablation studies makes it hard to know what actually helps
-
-- **Our goal:** peel away complexity → find the simplest model that works well
+- Answer questions using a single fact
+- SimpleQuestions is the standard benchmark
+- Complex architectures, diminishing gains
+- No rigorous ablation studies exist
+- Goal: find the simplest model that works
 
 </v-clicks>
 
 <!--
-Simple QA is about answering questions that map to a single fact in a knowledge graph. The SimpleQuestions dataset has become the standard benchmark. Recent work keeps proposing more complex architectures but gains are shrinking. We wanted to understand: how much of this complexity is actually necessary?
+Simple QA is about answering questions that map to a single fact in a knowledge graph. For example, "Where was Sasha Vujacic born?" maps to entity Sasha Vujacic and relation place_of_birth. The SimpleQuestions dataset from Bordes et al. 2015 has become the de facto benchmark.
+
+Recent work keeps proposing more complex architectures — attention mechanisms, hierarchical encoders, residual BiLSTMs — but gains are shrinking. There's a lack of rigorous ablation studies, so it's hard to know what actually helps. We wanted to understand: how much of this complexity is actually necessary? Our goal was to peel away complexity until we arrive at the simplest model that works well.
 ~3 min
 -->
 
@@ -86,24 +82,12 @@ graph LR
 
 </div>
 
-<div class="mt-6 grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
-
-<div>
-
-**Entity Detection** — identify entity mention span<br/>
-**Entity Linking** — map mention to KB entity
-
-</div>
-<div>
-
-**Relation Prediction** — predict the relation<br/>
-**Evidence Integration** — combine candidates for final answer
-
-</div>
-</div>
-
 <!--
-We follow a straightforward four-stage decomposition that's standard in the literature. First detect the entity mention in the question, then link it to the knowledge base, predict the relation, and finally combine evidence to produce the answer. The key insight is that each of these can be tackled with simple models.
+We follow a straightforward four-stage decomposition that's standard in the literature.
+
+Entity Detection identifies the entity mention span in the question. Entity Linking maps that mention to a knowledge base entity using Freebase lookups. Relation Prediction determines which relation is being asked about. Evidence Integration combines candidates from both stages to produce the final answer.
+
+The key insight is that each of these stages can be tackled with simple models — no need for complex end-to-end architectures.
 ~2 min
 -->
 

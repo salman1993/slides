@@ -4,13 +4,16 @@ title: "Slidev Example Deck"
 info: |
   An example presentation showcasing Slidev capabilities.
 class: text-center
+colorSchema: dark
+themeConfig:
+  primary: '#d4d4d8'
 drawings:
   persist: false
 transition: slide-left
 mdc: true
 fonts:
-  sans: Inter
-  mono: Fira Code
+  sans: Work Sans
+  mono: Space Mono
 ---
 
 # Slidev Example Deck
@@ -137,16 +140,16 @@ background: /images/demo.svg
 
 ### UnoCSS Utilities
 
-<div class="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 mt-2">
-  <p class="text-blue-400 font-mono text-sm">Styled with utility classes</p>
+<div class="p-4 rounded-lg bg-zinc-500/10 border border-zinc-500/20 mt-2">
+  <p class="text-zinc-300 font-mono text-sm">Styled with utility classes</p>
 </div>
 
-<div class="p-4 rounded-lg bg-green-500/10 border border-green-500/20 mt-2">
-  <p class="text-green-400 font-mono text-sm">Colors, spacing, borders</p>
+<div class="p-4 rounded-lg bg-zinc-500/10 border border-zinc-400/20 mt-2">
+  <p class="text-zinc-300 font-mono text-sm">Colors, spacing, borders</p>
 </div>
 
-<div class="p-4 rounded-lg bg-amber-500/10 border border-amber-500/20 mt-2">
-  <p class="text-amber-400 font-mono text-sm">Fonts, opacity, layout</p>
+<div class="p-4 rounded-lg bg-zinc-500/10 border border-zinc-400/20 mt-2">
+  <p class="text-zinc-300 font-mono text-sm">Fonts, opacity, layout</p>
 </div>
 
 </div>
@@ -216,12 +219,12 @@ graph LR
     B --> E[PPTX Export]
     C --> F[Deploy anywhere]
 
-    style A fill:#4f46e5,stroke:#6366f1,color:#fff
-    style B fill:#7c3aed,stroke:#8b5cf6,color:#fff
-    style C fill:#06b6d4,stroke:#22d3ee,color:#fff
-    style D fill:#06b6d4,stroke:#22d3ee,color:#fff
-    style E fill:#06b6d4,stroke:#22d3ee,color:#fff
-    style F fill:#10b981,stroke:#34d399,color:#fff
+    style A fill:#1a1a2e,stroke:#a1a1aa,color:#e4e4e7
+    style B fill:#1a1a2e,stroke:#d4d4d8,color:#e4e4e7
+    style C fill:#1a1a2e,stroke:#71717a,color:#e4e4e7
+    style D fill:#1a1a2e,stroke:#71717a,color:#e4e4e7
+    style E fill:#1a1a2e,stroke:#71717a,color:#e4e4e7
+    style F fill:#1a1a2e,stroke:#a1a1aa,color:#e4e4e7
 ```
 
 ---

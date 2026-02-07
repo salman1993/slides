@@ -1,4 +1,4 @@
-# Slides
+# slides
 
 Presentation decks built with [Slidev](https://sli.dev). Each subdirectory is an independent slide deck.
 
