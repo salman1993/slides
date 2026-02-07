@@ -20,3 +20,13 @@ Each subdirectory is an independent Slidev deck with its own `package.json` and 
 - Images go in `<deck>/images/`; reference as `/images/filename` in slides.
 - Theme is set via `theme:` in the first slide's frontmatter (default: `seriph`).
 - Fonts configured via `fonts:` frontmatter (`sans`, `mono`, `serif` keys).
+- Always use `colorSchema: dark` for dark themed slides.
+- Default font: `Work Sans` for sans, `Space Mono` for mono.
+- Default primary color: `'#d4d4d8'` (cool zinc gray) via `themeConfig.primary`.
+- Speaker notes go in `<!-- -->` HTML comments at the end of each slide. Keep slides minimal and move detail, examples, and context into notes.
+
+## Slide Content Guidelines
+- Avoid long sentences.
+- Avoid abbreviations and acronyms.
+- Limit punctuation marks.
+- For bullet points: one thought per line, no more than 6 lines per slide.
