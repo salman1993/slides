@@ -2,6 +2,22 @@
 
 Presentation decks built with [Slidev](https://sli.dev). Each subdirectory is an independent slide deck.
 
+Want to use this template? Just copy the `example/` directory and you're good to go.
+
+## Decks
+
+### [Strong Baselines for Simple QA over Knowledge Graphs](strong-baselines-simple-qa/)
+
+Paper: [Mohammed, Shi, Lin — NAACL-HLT 2018](https://aclanthology.org/N18-2047.pdf)
+
+See [this Amp thread](https://ampcode.com/threads/T-019c35b7-e79c-7300-b270-41ea7e5ed723) on how this deck was made from a single prompt:
+
+```
+read this PDF — https://aclanthology.org/N18-2047.pdf
+
+then, make me slides for a 20 min talk. make sure <10 slides
+```
+
 ## Quick Start
 
 ```bash
