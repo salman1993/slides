@@ -6,7 +6,7 @@ Want to use this template? Just copy the `example/` directory and you're good to
 
 ## Decks
 
-### [Strong Baselines for Simple QA over Knowledge Graphs](strong-baselines-simple-qa/)
+#### [Strong Baselines for Simple QA over Knowledge Graphs](strong-baselines-simple-qa/)
 
 Paper: [Mohammed, Shi, Lin — NAACL-HLT 2018](https://aclanthology.org/N18-2047.pdf)
 
