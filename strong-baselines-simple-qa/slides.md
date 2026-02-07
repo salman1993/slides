@@ -72,12 +72,12 @@ graph LR
     RP --> EI[Evidence Integration]
     EI --> A["Answer:<br/>Ljubljana"]
 
-    style Q fill:#1a1a2e,stroke:#4f46e5,color:#e2e8f0
-    style ED fill:#1a1a2e,stroke:#06b6d4,color:#e2e8f0
-    style EL fill:#1a1a2e,stroke:#06b6d4,color:#e2e8f0
-    style RP fill:#1a1a2e,stroke:#06b6d4,color:#e2e8f0
-    style EI fill:#1a1a2e,stroke:#06b6d4,color:#e2e8f0
-    style A fill:#1a1a2e,stroke:#10b981,color:#e2e8f0
+    style Q fill:#1a1a2e,stroke:#a1a1aa,color:#e4e4e7
+    style ED fill:#1a1a2e,stroke:#71717a,color:#e4e4e7
+    style EL fill:#1a1a2e,stroke:#71717a,color:#e4e4e7
+    style RP fill:#1a1a2e,stroke:#71717a,color:#e4e4e7
+    style EI fill:#1a1a2e,stroke:#71717a,color:#e4e4e7
+    style A fill:#1a1a2e,stroke:#d4d4d8,color:#e4e4e7
 ```
 
 </div>
@@ -98,28 +98,25 @@ The key insight is that each of these stages can be tackled with simple models �
 <div class="grid grid-cols-2 gap-8 mt-4">
 <div>
 
-### Neural Network Models
+### Neural Models
 
 <v-clicks>
 
-- **Entity Detection:** BiLSTM-CRF sequence tagger
-- **Entity Linking:** Freebase lookup + Levenshtein Distance ranking
-- **Relation Prediction:** BiGRU / CNN classifiers with GloVe embeddings
-- Hidden size: 300, GloVe 300d, Adam optimizer
+- BiLSTM-CRF for entity detection
+- BiGRU / CNN for relation prediction
+- GloVe 300d word embeddings
 
 </v-clicks>
 
 </div>
 <div>
 
-### Non-Neural Baselines
+### Non-Neural Models
 
 <v-clicks>
 
-- **Entity Detection:** CRF (Stanford NER tagger)
-- **Relation Prediction:**
-  - Logistic Regression with **tf-idf** features
-  - Logistic Regression with **GloVe + relation words**
+- CRF for entity detection
+- Logistic Regression for relations
 - No deep learning required
 
 </v-clicks>
@@ -128,7 +125,9 @@ The key insight is that each of these stages can be tackled with simple models �
 </div>
 
 <!--
-On the neural side, we use basic LSTMs and GRUs — nothing exotic. For entity detection, a BiLSTM-CRF. For relation prediction, a BiGRU or CNN. On the non-neural side, we use a standard CRF for entity detection and logistic regression for relation prediction. These are all "Deep Learning 101" level models.
+On the neural side, we use basic architectures — nothing exotic. A BiLSTM-CRF sequence tagger for entity detection, and BiGRU or CNN classifiers for relation prediction, all with GloVe 300d embeddings. Entity linking uses Freebase lookup with Levenshtein distance ranking. Hidden size is 300, trained with Adam optimizer.
+
+On the non-neural side, we use a standard CRF (Stanford NER tagger) for entity detection and logistic regression for relation prediction — one variant with tf-idf features and another with GloVe embeddings plus relation words. These are all "Deep Learning 101" level models at most.
 ~3 min
 -->
 
@@ -148,8 +147,6 @@ On the neural side, we use basic LSTMs and GRUs — nothing exotic. For entity d
 | 20  | 88.7   | 87.4 |
 | 50  | 91.0   | 89.8 |
 
-<div class="text-xs opacity-60 mt-2">CRF is only ~1 point behind the BiLSTM</div>
-
 </div>
 <div>
 
@@ -161,15 +158,14 @@ On the neural side, we use basic LSTMs and GRUs — nothing exotic. For entity d
 | CNN | 82.8 | 95.8 |
 | LR (tf-idf) | 72.4 | 87.6 |
 | LR (GloVe+rel) | 74.7 | 92.2 |
-| Ture & Jojic '17 | 81.6 | — |
-
-<div class="text-xs opacity-60 mt-2">LR with GloVe is within ~8 points of NN models</div>
 
 </div>
 </div>
 
 <!--
-Looking at individual components: for entity linking, the CRF is only about 1 point behind the BiLSTM across all recall levels. For relation prediction, basic BiGRU and CNN are comparable, and even logistic regression with GloVe features gets to 74.7 — not that far behind. The non-neural approaches are surprisingly competitive on each component.
+Looking at individual components: for entity linking, the CRF is only about 1 point behind the BiLSTM across all recall levels — the difference is negligible.
+
+For relation prediction, basic BiGRU and CNN are comparable at around 82 R@1. Even logistic regression with GloVe features gets to 74.7 — within about 8 points of the neural models. For context, Ture and Jojic 2017, a more complex model, only reached 81.6. The non-neural approaches are surprisingly competitive on each individual component.
 ~3 min
 -->
 
@@ -179,25 +175,20 @@ Looking at individual components: for entity linking, the CRF is only about 1 po
 
 | Model | Accuracy |
 |-------|----------|
-| Bordes et al. 2015 (Memory Networks) | 62.7 |
-| Golub & He 2016 | 70.9 |
+| Bordes et al. 2015 | 62.7 |
+| Golub and He 2016 | 70.9 |
 | Lukovnikov et al. 2017 | 71.2 |
 | **Ours: BiLSTM + BiGRU** | **74.9** |
-| **Ours: BiLSTM + CNN** | **74.7** |
-| **Ours: CRF + LR (GloVe+rel)** | **69.9** |
-| **Ours: CRF + LR (tf-idf)** | **67.3** |
-| Yin et al. 2016 | 68.3 |
+| **Ours: CRF + LR (GloVe)** | **69.9** |
 | Yu et al. 2017 | 75.1 |
 | Dai et al. 2016 | 75.7 |
 
-<div class="text-sm mt-4 opacity-80">
-
-Our simple BiLSTM+BiGRU baseline **approaches the state of the art** (74.9 vs 75.7). The fully NN-free baseline (67.3) **beats the original Memory Networks** result.
-
-</div>
-
 <!--
-Here's the punchline. Our simple BiLSTM plus BiGRU achieves 74.9 accuracy, within about 1 point of the state of the art at 75.7. Even more striking: our completely neural-network-free baseline at 67.3 beats the original Memory Networks paper. The CRF + LR with GloVe gets to 69.9. This shows that sophisticated architectures provide only modest gains over strong baselines.
+Here's the punchline. Our simple BiLSTM plus BiGRU achieves 74.9 accuracy — within about 1 point of the state of the art at 75.7 by Dai et al. Our BiLSTM + CNN variant gets 74.7, essentially the same.
+
+Even more striking: our completely neural-network-free baseline (CRF + LR with tf-idf) at 67.3 beats the original Memory Networks result of 62.7 by Bordes et al. The CRF + LR with GloVe gets to 69.9, also beating Yin et al. 2016 at 68.3.
+
+This shows that sophisticated architectures provide only modest gains over strong baselines. The gap between our simple neural model and state of the art is within noise of random seed variation.
 ~3 min
 -->
 
@@ -207,24 +198,21 @@ Here's the punchline. Our simple BiLSTM plus BiGRU achieves 74.9 accuracy, withi
 
 <v-clicks>
 
-- **Basic LSTMs/GRUs + heuristics ≈ state of the art** on SimpleQuestions
-  - Gap is ~1 point, within noise of random seed variation
-
-- **Non-neural methods are surprisingly competitive**
-  - CRF + Logistic Regression beats Memory Networks (Bordes et al., 2015)
-
-- Some published models exhibit **unnecessary complexity**
-  - Attention, residual learning, hierarchical encoders yield marginal gains
-  - Several complex models actually perform *worse* than our baselines
-
-- **Practical implications:** simpler models are easier to train, deploy, and maintain
-  - Sculley et al. (2014): ML solutions incur heavy technical debt
-  - Netflix didn't deploy the Netflix Prize winner due to complexity
+- Simple models nearly match state of the art
+- Non-neural methods beat Memory Networks
+- Many complex models add unnecessary overhead
+- Simpler means easier to deploy and maintain
 
 </v-clicks>
 
 <!--
-The takeaways are clear. First, basic neural architectures nearly match the state of the art. Second, non-neural methods are competitive — they beat the original baseline. Third, some published models are unnecessarily complex and even underperform our simple baselines. And practically speaking, simpler models mean lower maintenance costs, easier debugging, and faster iteration.
+The takeaways are clear. First, basic neural architectures like LSTMs and GRUs nearly match the state of the art — the gap is about 1 point, within noise of random seed variation.
+
+Second, non-neural methods are surprisingly competitive. CRF + Logistic Regression beats the original Memory Networks result from Bordes et al. 2015.
+
+Third, some published models exhibit unnecessary complexity. Attention mechanisms, residual learning, and hierarchical encoders yield only marginal gains. Several complex models actually perform worse than our simple baselines.
+
+And practically speaking, simpler models are easier to train, deploy, and maintain. As Sculley et al. 2014 showed, ML solutions incur heavy technical debt. Netflix famously didn't deploy the Netflix Prize winning ensemble due to its engineering complexity. The lesson: always establish strong baselines before reaching for complex architectures.
 ~3 min
 -->
 
