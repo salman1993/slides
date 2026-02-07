@@ -1,0 +1,14 @@
+{
+  "name": "ayman-thesis",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --open",
+    "build": "slidev build",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.11.5",
+    "@slidev/theme-seriph": "^0.25.0"
+  }
+}
